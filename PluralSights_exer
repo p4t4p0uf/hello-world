@@ -1,0 +1,24 @@
+function formatOutput (myData){
+  var myResults = myData.data.children;
+  var thumbnail
+
+  $('.text').html('');
+  $('.text').append('<p>Here are my cute puppies!</p>'); 
+
+  for (var i = 0; i < myResults.length; i++) {
+    thumbnail = "<img src=" + myResults[i].data.thumbnail + ">"
+    $('.text').append(thumbnail); 
+  };
+};
+
+//**********
+
+$('.btn').click(function(){
+  $('.text').text('Loading....');
+  
+  $.ajax({
+    type:     "GET",
+    url:      "https://www.reddit.com/r/aww/search.json?q=puppy&restrict_sr=true",
+    success:  function(data){formatOutput(data)},
+    });
+});
